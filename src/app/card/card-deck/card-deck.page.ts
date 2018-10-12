@@ -10,14 +10,24 @@ import { CardDeck } from '../shared/card.model';
 })
 
 export class CardDeckPage {
-constructor(private cardService: CardService) {
-    this.getCardDecks();
-}
 
-public cardDecks: CardDeck[] = [];
+    private readonly ALLOWED_DECKS = ['classes', 'factions', 'qualities', 'types', 'races']
 
-private getCardDecks() {
-    this.cardService.getAllCardDecks().subscribe(
-        (cardDecks: CardDeck[]) => this.cardDecks = cardDecks)
+    public cardDecks: CardDeck[] = [];
+
+    constructor(private cardService: CardService) {
+        this.getCardDecks();
     }
+
+    private getCardDecks() {
+        this.cardService.getAllCardDecks().subscribe(
+            (cardDecks: CardDeck[]) => {
+                this.extractAllowedDecks(cardDecks)
+            })
+    }           
+
+    extractAllowedDecks(cardDecks: CardDeck[]) {
+        this.ALLOWED_DECKS.forEach((deckName: string) => this.cardDecks.push({name: deckName, types: cardDecks[deckName]}))
+    }
+
 }

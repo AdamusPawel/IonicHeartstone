@@ -7,6 +7,8 @@ import { CardDeckPage } from './card-deck/card-deck.page';
 
 import { CardService} from './shared/card.service';
 
+import { CardListComponent } from './components/card-list.component';
+
 @NgModule({
     imports: [
         IonicModule,
@@ -17,7 +19,8 @@ import { CardService} from './shared/card.service';
         CardService
     ],
     declarations: [
-        CardDeckPage
+        CardDeckPage,
+        CardListComponent
     ]
 })
 
