@@ -9,6 +9,7 @@ import { CardDetailPage } from './card-detail/card-detail.page';
 
 import { CardService } from './shared/card.service';
 import { LoaderService } from '../shared/service/loader.service';
+import { ToastService } from '../shared/service/toast.service';
 
 import { CardListComponent } from './components/card-list.component';
 
@@ -20,7 +21,8 @@ import { CardListComponent } from './components/card-list.component';
     ],
     providers: [
         CardService,
-        LoaderService
+        LoaderService,
+        ToastService
     ],
     declarations: [
         CardDeckPage,

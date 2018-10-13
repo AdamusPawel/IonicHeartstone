@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../shared/service/loader.service';
 import { CardService } from '../shared/card.service';
+import { ToastService } from '../../shared/service/toast.service';
 
 import { Card } from '../shared/card.model';
 
@@ -18,7 +19,8 @@ export class CardListingPage{
 
   constructor(private route: ActivatedRoute,
               private cardService: CardService,
-              private loaderService: LoaderService) { }
+              private loaderService: LoaderService,
+              private toaster: ToastService) { }
 
   ionViewWillEnter() {
     this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
@@ -35,6 +37,9 @@ export class CardListingPage{
         });
 
         this.loaderService.dismissLoading();
+      }, () => {
+        this.loaderService.dismissLoading();
+        this.toaster.presentErrorToast("Oops! Cards could not be loaded. Try refresh page.")
       })
   }
 }
