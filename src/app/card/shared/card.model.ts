@@ -9,16 +9,17 @@ export interface Card {
     img: string;
     imgGold: string;
     name: string;
-
-    attack: number;
+    text: string;
+    favorite: boolean;
+  
     cost: number;
+    attack: number;
     health: number;
     rarity: string;
     type: string;
-
+  
     dbfId: string;
     faction: string;
     playerClass: string;
     locale: string;
-
-}
+  }
