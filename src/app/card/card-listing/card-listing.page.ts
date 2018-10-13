@@ -22,10 +22,7 @@ export class CardListingPage{
               private loaderService: LoaderService,
               private toaster: ToastService) { }
 
-  ionViewWillEnter() {
-    this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
-    this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
-    
+  private getCards() {
     this.loaderService.presentLoading();
 
     this.cardService.getCardsByDeck(this.cardDeckGroup, this.cardDeck).subscribe(
@@ -40,6 +37,13 @@ export class CardListingPage{
       }, () => {
         this.loaderService.dismissLoading();
         this.toaster.presentErrorToast("Oops! Cards could not be loaded. Try refresh page.")
-      })
+    })
   }
+
+  ionViewWillEnter() {
+    this.cardDeckGroup = this.route.snapshot.paramMap.get('cardDeckGroup');
+    this.cardDeck = this.route.snapshot.paramMap.get('cardDeck');
+    
+    if(this.cards && this.cards.length === 0) this.getCards();
+   } 
 }
