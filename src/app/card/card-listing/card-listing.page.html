@@ -25,6 +25,9 @@
             <ion-card-header text-wrap>
                 <ion-card-subtitle>
                     {{card.cardSet}}
+
+                    <ion-icon (click)="favouriteCard(card)" [ngClass]="card.favorite ? 'favorite' : 'normal'" name="heart" class="like-icon"></ion-icon>
+
                 </ion-card-subtitle>
                 <ion-card-title>
                     {{card.name}}

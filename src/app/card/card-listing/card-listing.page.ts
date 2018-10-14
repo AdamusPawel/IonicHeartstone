@@ -64,4 +64,12 @@ export class CardListingPage{
    handleSearch() {
      this.isLoading = true;
    }
+
+   favouriteCard(card: Card) {
+    if (card.favorite) {
+      card.favorite = false;
+    } else {
+      card.favorite = true;
+    }
+   }
 }
