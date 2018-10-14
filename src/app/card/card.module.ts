@@ -11,6 +11,7 @@ import { CardService } from './shared/card.service';
 import { LoaderService } from '../shared/service/loader.service';
 import { ToastService } from '../shared/service/toast.service';
 import { AlertService } from '../shared/service/alert.service';
+import { FavoriteCardStore } from './shared/card-favorite.store';
 
 import { CardListComponent } from './components/card-list.component';
 import { SearchComponent } from '../shared/component/search/search.component';
@@ -25,7 +26,8 @@ import { SearchComponent } from '../shared/component/search/search.component';
         CardService,
         LoaderService,
         ToastService,
-        AlertService
+        AlertService,
+        FavoriteCardStore
     ],
     declarations: [
         CardDeckPage,

@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { LoaderService } from '../../shared/service/loader.service';
 import { CardService } from '../shared/card.service';
 import { ToastService } from '../../shared/service/toast.service';
+import { Storage } from '@ionic/storage';
+import { FavoriteCardStore } from '../shared/card-favorite.store'
 
 import { Card } from '../shared/card.model';
 
@@ -18,12 +20,22 @@ export class CardListingPage{
   cards: Card[] = [];
   copyOfCards: Card[] = [];
 
+  favoriteCards: any = {};
+
   isLoading: boolean = false;
 
   constructor(private route: ActivatedRoute,
               private cardService: CardService,
               private loaderService: LoaderService,
-              private toaster: ToastService) { }
+              private toaster: ToastService,
+              private storage: Storage,
+              private favoriteCardStore: FavoriteCardStore ) {
+
+    this.favoriteCardStore.favoriteCards.subscribe(
+      (favoriteCards: any) => {
+        this.favoriteCards = favoriteCards;
+      })
+  }
 
   private getCards() {
     this.loaderService.presentLoading();
@@ -32,7 +44,7 @@ export class CardListingPage{
       (cards: Card[]) => {
         this.cards = cards.map((card: Card) => {
           card.text = this.cardService.replaceCardTextLine(card.text);
-
+          card.favorite = this.isCardFavorite(card.cardId);
           return card;
         });
 
@@ -42,6 +54,12 @@ export class CardListingPage{
         this.loaderService.dismissLoading();
         this.toaster.presentErrorToast("Oops! Cards could not be loaded. Try refresh page.")
     })
+  }
+
+  private isCardFavorite(cardId: string): boolean {
+    const card = this.favoriteCards[cardId];
+
+    return card ? true : false;
   }
 
   ionViewWillEnter() {
@@ -65,11 +83,9 @@ export class CardListingPage{
      this.isLoading = true;
    }
 
-   favouriteCard(card: Card) {
-    if (card.favorite) {
-      card.favorite = false;
-    } else {
-      card.favorite = true;
-    }
+   favoriteCard(card: Card) {
+    this.favoriteCardStore.toggleCard(card);
    }
+
+
 }
