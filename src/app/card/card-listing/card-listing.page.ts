@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { FavoriteCardStore } from '../shared/card-favorite.store'
 
 import { Card } from '../shared/card.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-card-listing',
@@ -24,6 +25,8 @@ export class CardListingPage{
 
   isLoading: boolean = false;
 
+  favoriteCardSub: Subscription;
+
   constructor(private route: ActivatedRoute,
               private cardService: CardService,
               private loaderService: LoaderService,
@@ -31,10 +34,16 @@ export class CardListingPage{
               private storage: Storage,
               private favoriteCardStore: FavoriteCardStore ) {
 
-    this.favoriteCardStore.favoriteCards.subscribe(
+    this.favoriteCardSub = this.favoriteCardStore.favoriteCards.subscribe(
       (favoriteCards: any) => {
         this.favoriteCards = favoriteCards;
       })
+  }
+
+  ionViewDidLeave() {
+    if (this.favoriteCardSub && !this.favoriteCardSub.closed) {
+      this.favoriteCardSub.unsubscribe();
+    }
   }
 
   private getCards() {
