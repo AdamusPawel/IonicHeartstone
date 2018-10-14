@@ -4,7 +4,7 @@ import { LoaderService } from '../../shared/service/loader.service';
 import { CardService } from '../shared/card.service';
 import { ToastService } from '../../shared/service/toast.service';
 import { Storage } from '@ionic/storage';
-import { FavoriteCardStore } from '../shared/card-favorite.store'
+import { FavoriteCardStore } from '../shared/card-favorite.store';
 
 import { Card } from '../shared/card.model';
 import { Subscription } from 'rxjs';

@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardDeckPage } from './card-deck/card-deck.page';
 import { CardListingPage } from './card-listing/card-listing.page';
 import { CardDetailPage } from './card-detail/card-detail.page';
+import { CardFavoritePage } from './card-favorite/card-favorite.page';
 
 import { CardService } from './shared/card.service';
 import { LoaderService } from '../shared/service/loader.service';
@@ -33,6 +34,7 @@ import { SearchComponent } from '../shared/component/search/search.component';
         CardDeckPage,
         CardListingPage,
         CardDetailPage,
+        CardFavoritePage,
         CardListComponent,
         SearchComponent
     ]
