@@ -13,6 +13,7 @@ import { ToastService } from '../shared/service/toast.service';
 import { AlertService } from '../shared/service/alert.service';
 
 import { CardListComponent } from './components/card-list.component';
+import { SearchComponent } from '../shared/component/search/search.component';
 
 @NgModule({
     imports: [
@@ -29,8 +30,9 @@ import { CardListComponent } from './components/card-list.component';
     declarations: [
         CardDeckPage,
         CardListingPage,
+        CardDetailPage,
         CardListComponent,
-        CardDetailPage
+        SearchComponent
     ]
 })
 
